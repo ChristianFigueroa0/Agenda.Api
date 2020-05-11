@@ -14,5 +14,7 @@ namespace Agenda.Api.Models
         public string Descripcion { get; set; }
 
         public DateTime FechaCreado { get; set; }
+
+        public bool Completado { get; set; }
     }
 }

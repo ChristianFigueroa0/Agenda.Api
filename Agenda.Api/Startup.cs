@@ -16,6 +16,7 @@ namespace Agenda.Api
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,6 +31,12 @@ namespace Agenda.Api
                     options.UseSqlServer(Configuration.GetConnectionString("AgendaDb")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddCors(o => o.AddPolicy("My policy", builder => {
+                builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +46,8 @@ namespace Agenda.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("My policy");
 
             app.UseMvc();
         }
