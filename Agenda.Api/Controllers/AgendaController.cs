@@ -19,6 +19,8 @@ namespace Agenda.Api.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        [Route("get")]
         public async Task<IActionResult> Get()
         {
             var agendas = await _context.Agendas.ToListAsync();
